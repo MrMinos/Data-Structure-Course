@@ -11,10 +11,11 @@ class Road
   double length;
 
 public:
-  double asphalt (double);
+  Road (double, double);
+  double asphalt (double) const;
   void SetWidth(double);
-  double GetWidth();
+  double GetWidth() const;
   void SetLength(double);
-  double GetLength();
+  double GetLength() const;
 };
 #endif
