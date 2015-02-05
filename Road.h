@@ -1,4 +1,4 @@
-// Lab 1a, Class Programming And Testing
+// Lab 3a, const And Constructors, Part 1
 // Programmer: Minos Park 
 // Editor(s) used: Sublime Text 2 
 // Compiler(s) used: G++
@@ -12,10 +12,10 @@ class Road
 
 public:
   Road (double, double);
-  double asphalt (double) const;
-  void SetWidth(double);
+  double asphalt (const double) const;
+  void SetWidth(const double);
   double GetWidth() const;
-  void SetLength(double);
+  void SetLength(const double);
   double GetLength() const;
 };
 #endif

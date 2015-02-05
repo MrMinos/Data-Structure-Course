@@ -1,4 +1,4 @@
-// Lab 1a, Class Programming And Testing
+// Lab 3a, const And Constructors, Part 1
 // Programmer: Minos Park 
 // Editor(s) used: Sublime Text 2 
 // Compiler(s) used: G++
@@ -13,14 +13,14 @@ using namespace std;
 int main() 
 { 
   // print my name and this assignment's title 
-  cout << "Lab 1a, Class Programming And Testing"; 
+  cout << "Lab 3a, const And Constructors, Part 1"; 
   cout << "Programmer: Minos Park\n"; 
   cout << "Editor(s) used: Sublime Text 2\n"; 
   cout << "Compiler(s) used: G++\n"; 
   cout << "File: " << __FILE__ << endl; 
   cout << "Complied: " << __DATE__ << " at " << __TIME__ << endl << endl; 
   
-  Road road;
+  Road road(0, 0);
   double thickness=0;
 
   road.SetWidth(100);
@@ -68,7 +68,7 @@ int main()
   assert(10456418.544 == road.asphalt(thickness));
   cout << "\n";
 
-  Road copy = road;
+  const Road copy = road;
 
   cout << "Width of road: " << road.GetWidth() << "\n";
   cout << "Width of copy: " << copy.GetWidth() << "\n";
@@ -77,7 +77,7 @@ int main()
   cout << "Length of copy: " << copy.GetLength() << "\n\n";
   assert(copy.GetLength() == road.GetLength());
 
-  Road copy2; copy2 = road;
+  Road copy2(0,0); copy2 = road;
 
   cout << "Width of road: " << road.GetWidth() << "\n";
   cout << "Width of copy2: " << copy2.GetWidth() << "\n";

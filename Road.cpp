@@ -1,4 +1,4 @@
-// Lab 1a, Class Programming And Testing
+// Lab 3a, const And Constructors, Part 1
 // Programmer: Minos Park 
 // Editor(s) used: Sublime Text 2 
 // Compiler(s) used: G++
@@ -9,12 +9,12 @@ Road::Road (double w, double l)
   width = w; length = l;
 }
 
-double Road::asphalt (double thick) const
+double Road::asphalt (const double thick) const
 {
   return width * length * (thick / 12);
 }
 
-void Road::SetWidth(double w)
+void Road::SetWidth(const double w)
 {
   width = w;
 }
@@ -24,7 +24,7 @@ double Road::GetWidth() const
   return width;
 }
 
-void Road::SetLength(double l)
+void Road::SetLength(const double l)
 {
   length = l * 5280;
 }
