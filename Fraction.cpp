@@ -1,11 +1,11 @@
-// Lab 2a, Writing Overloading Operators
+// Lab 3c, const And Constructors, Part 3
 // Programmer: Minos Park 
 // Editor(s) used: Sublime Text 2 
 // Compiler(s) used: G++
 
 #include "Fraction.h"
 
-Fraction operator + (Fraction l, Fraction r)
+Fraction operator + (const Fraction& l, const Fraction& r)
 {
   Fraction t;
   if (l.denominator == r.denominator)
@@ -21,7 +21,7 @@ Fraction operator + (Fraction l, Fraction r)
   return t;
 }
 
-Fraction operator * (Fraction l, Fraction r)
+Fraction operator * (const Fraction& l, const Fraction& r)
 {
   Fraction t;
   t.denominator = l.denominator * r.denominator;
@@ -29,17 +29,17 @@ Fraction operator * (Fraction l, Fraction r)
   return t;
 }
 
-bool operator > (Fraction l, Fraction r)
+bool Fraction::operator>(const Fraction& l, const Fraction& r) const
 {
   return ((double) l.numerator / l.denominator) > ((double) r.numerator / r.denominator);
 }
 
-Fraction operator * (int a, Fraction t)
+Fraction operator * (const int a, Fraction t)
 {
   t.numerator = a * t.numerator;
   return t;
 }
-Fraction operator * (Fraction t, int a)
+Fraction operator * (Fraction t, const int a)
 {
   t.numerator = a * t.numerator;
   return t;

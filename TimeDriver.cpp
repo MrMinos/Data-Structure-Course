@@ -1,4 +1,4 @@
-// Lab 1b, More Class Programming And Testing
+// Lab 3b, const And Constructors, Part 2
 // Programmer: Minos Park 
 // Editor(s) used: Sublime Text 2 
 // Compiler(s) used: G++
@@ -13,7 +13,7 @@ using namespace std;
 int main() 
 { 
   // print my name and this assignment's title 
-  cout << "Lab 1b, More Class Programming And Testing"; 
+  cout << "Lab 3b, const And Constructors, Part 2"; 
   cout << "Programmer: Minos Park\n"; 
   cout << "Editor(s) used: Sublime Text 2\n"; 
   cout << "Compiler(s) used: G++\n"; 
@@ -21,7 +21,7 @@ int main()
   cout << "Complied: " << __DATE__ << " at " << __TIME__ << endl << endl; 
   
   int hour, minute, second;
-  Time test;
+  Time test = Time();
 
   hour = 1; test.setHours(hour);
   minute = 40; test.setMinutes(minute);
@@ -71,9 +71,7 @@ int main()
   cout << "Calculated Time in Seconds: " << test.timeInSeconds() << "\n\n";
   assert(1800==test.timeInSeconds());
 
-  hour = 0; test.setHours(hour);
-  minute = 12; test.setMinutes(minute);
-  second = 0; test.setSeconds(second);
+  test = Time(0, 12, 0);
   cout << "Hours: " << hour << "\n";
   cout << "Minutes: " << minute << "\n";
   cout << "Seconds: " << second << "\n";
@@ -87,7 +85,21 @@ int main()
   cout << "Calculated Time in Seconds: " << test.timeInSeconds() << "\n\n";
   assert(720==test.timeInSeconds());
 
-  Time copy = test;
+  test = Time(0, 30, 0);
+  cout << "Hours: " << hour << "\n";
+  cout << "Minutes: " << minute << "\n";
+  cout << "Seconds: " << second << "\n";
+  cout << "Expected Time in Hours: 0.5\n";
+  cout << "Calculated Time in Hours: " << test.timeInHours() << "\n";
+  assert(0.5==test.timeInHours());
+  cout << "Expected Time in Minutes: 30\n";
+  cout << "Calculated Time in Minutes: " << test.timeInMinutes() << "\n";
+  assert(30==test.timeInMinutes());
+  cout << "Expected Time in Seconds: 1800\n";
+  cout << "Calculated Time in Seconds: " << test.timeInSeconds() << "\n\n";
+  assert(1800==test.timeInSeconds());
+
+  const Time copy = test;
   cout << "Calculated Time in Hours @ copy: " << copy.timeInHours() << "\n";
   cout << "Calculated Time in Hours @ test: " << test.timeInHours() << "\n";
   assert(copy.timeInHours()==test.timeInHours());
@@ -98,7 +110,7 @@ int main()
   cout << "Calculated Time in Seconds @ test: " << test.timeInSeconds() << "\n\n";
   assert(copy.timeInSeconds()==test.timeInSeconds());
 
-  Time copy2; copy2 = test;
+  Time copy2 = Time(0,0,0); copy2 = test;
   cout << "Calculated Time in Hours @ copy2: " << copy2.timeInHours() << "\n";
   cout << "Calculated Time in Hours @ test: " << test.timeInHours() << "\n";
   assert(copy2.timeInHours()==test.timeInHours());

@@ -1,4 +1,4 @@
-// Lab 2a, Writing Overloading Operators
+// Lab 3c, const And Constructors, Part 3
 // Programmer: Minos Park 
 // Editor(s) used: Sublime Text 2 
 // Compiler(s) used: G++
@@ -10,12 +10,14 @@ struct Fraction
 {
   int denominator = 1;
   int numerator = 0;
+  bool operator>(const Fraction&, const Fraction&) const;
 };
 
-Fraction operator + (Fraction, Fraction);
-Fraction operator * (Fraction, Fraction);
-bool operator > (Fraction, Fraction);
-Fraction operator * (int, Fraction);
-Fraction operator * (Fraction, int);
+Fraction operator + (const Fraction&, const Fraction&);
+Fraction operator * (const Fraction&, const Fraction&);
+
+Fraction operator * (const int, Fraction);
+Fraction operator * (Fraction, const int);
+
 
 #endif

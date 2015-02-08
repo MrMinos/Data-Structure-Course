@@ -1,4 +1,4 @@
-// Lab 2b, Writing Templated Classes
+// Lab 3c, const And Constructors, Part 3
 // Programmer: Minos Park 
 // Editor(s) used: Sublime Text 2 
 // Compiler(s) used: G++
@@ -14,7 +14,7 @@ using namespace std;
 
 int main() 
 {
-  cout << "Lab 2b, Writing Templated Classes"; 
+  cout << "Lab 3c, const And Constructors, Part 3"; 
   cout << "Programmer: Minos Park\n"; 
   cout << "Editor(s) used: Sublime Text 2\n"; 
   cout << "Compiler(s) used: G++\n"; 
@@ -113,6 +113,47 @@ int main()
   assert(1143744 == x.numerator);
   assert(2768256 == x.denominator);
 
+  //2 data constructor test - float
+  testfloat = Rectangle<float>(199.32, 244.294);
+  cout << "Test length_greater_than_width \n";
+  cout << "Length: " << length_f << ", Width: " << width_f << "\n";
+  cout << "Expected value: True\n";
+  cout << "Result: " << testfloat.length_greater_than_width() << "\n\n";
+  assert(true == testfloat.length_greater_than_width());
+  cout << "Test getPerimeter \n";
+  cout << "Expected value: 887.228\n";
+  cout << "Result: " << testfloat.getPerimeter() << "\n\n";
+  assert(887.229 >= testfloat.getPerimeter());
+  assert(887.227 <= testfloat.getPerimeter());
+  cout << "Test getArea \n";
+  cout << "Expected value: 48692.68008\n";
+  cout << "Result: " << testfloat.getArea() << "\n\n";
+  assert(48692.7 >= testfloat.getArea());
+  assert(48692.6 <= testfloat.getArea());
+
+  //2 data constructor test - Fraction
+  length_frac.denominator = 48; length_frac.numerator = 25;
+  width_frac.denominator = 38; width_frac.numerator = 59;
+  testfraction = Rectangle<Fraction>(width_frac, length_frac);
+  cout << "Test length_greater_than_width \n";
+  cout << "Length: " << length_frac.numerator << "/" << length_frac.denominator << "\n";
+  cout << "Width: " << width_frac.numerator << "/" << width_frac.denominator << "\n";
+  cout << "Expected value: False\n";
+  cout << "Result: " << testfraction.length_greater_than_width() << "\n\n";
+  assert(false == testfraction.length_greater_than_width());
+  cout << "Test getPerimeter \n";
+  cout << "Expected value: 7564/1824\n";
+  x = testfraction.getPerimeter();
+  cout << "Result: " << x.numerator << "/" << x.denominator << "\n\n";
+  assert(7564 == x.numerator);
+  assert(1824 == x.denominator);
+  cout << "Test getArea \n";
+  cout << "Expected value: 1475/1824\n";
+  x = testfraction.getArea();
+  cout << "Result: " << x.numerator << "/" << x.denominator << "\n\n";
+  assert(1475 == x.numerator);
+  assert(1824 == x.denominator);
+
   //object copy test
   Rectangle<float> copy = testfloat;
   Rectangle<Fraction> copy2 = testfraction;
@@ -130,7 +171,6 @@ int main()
   assert(x.numerator == y.numerator);
   assert(x.denominator == y.denominator);
   cout << "object copy test passed!\n";
-
 
   //object assignment test
   Rectangle<float> copy3; copy3 = testfloat;

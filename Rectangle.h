@@ -1,4 +1,4 @@
-// Lab 2b, Writing Templated Classes
+// Lab 3c, const And Constructors, Part 3
 // Programmer: Minos Park 
 // Editor(s) used: Sublime Text 2 
 // Compiler(s) used: G++
@@ -11,50 +11,59 @@ class Rectangle
   DataType length;
   DataType width;
 public:
-  void setLength(DataType);
-  void setWidth(DataType);
-  bool length_greater_than_width();
-  DataType getPerimeter();
-  DataType getArea();
+  Rectangle();
+  Rectangle(const DataType&, const DataType&);
+  void setLength(const DataType&);
+  void setWidth(const DataType&);
+  bool length_greater_than_width() const;
+  DataType getPerimeter() const;
+  DataType getArea() const;
 };
 
+
 template <class DataType>
-void Rectangle<DataType>::setLength(DataType l)
+Rectangle<DataType>::Rectangle()
+{
+
+}
+
+template <class DataType>
+Rectangle<DataType>::Rectangle(const DataType& w, const DataType& l)
+{
+  length = l; width = w;
+}
+
+template <class DataType>
+void Rectangle<DataType>::setLength(const DataType& l)
 {
   length = l;
 }
 
 template <class DataType>
-void Rectangle<DataType>::setWidth(DataType w)
+void Rectangle<DataType>::setWidth(const DataType& w)
 {
   width = w;
 }
 
 template <class DataType>
-bool Rectangle<DataType>::length_greater_than_width()
+bool Rectangle<DataType>::length_greater_than_width() const
 {
   if(length > width) return true;
   else return false;
 }
 
 template <class DataType>
-DataType Rectangle<DataType>::getPerimeter()
+DataType Rectangle<DataType>::getPerimeter() const
 {
-  DataType t;
 
-  t = ( length + width ) * 2;
-
-  return t; 
+  return ( length + width ) * 2; 
 }
 
 template <class DataType>
-DataType Rectangle<DataType>::getArea()
+DataType Rectangle<DataType>::getArea() const
 {
-  DataType t;
 
-  t = ( length * width );
-
-  return t;
+  return length * width;
 }
 
 
