@@ -10,12 +10,11 @@ struct Fraction
 {
   int denominator = 1;
   int numerator = 0;
-  bool operator>(const Fraction&, const Fraction&) const;
 };
 
 Fraction operator + (const Fraction&, const Fraction&);
 Fraction operator * (const Fraction&, const Fraction&);
-
+bool operator > (const Fraction&, const Fraction&);
 Fraction operator * (const int, Fraction);
 Fraction operator * (Fraction, const int);
 

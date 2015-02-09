@@ -29,7 +29,7 @@ Fraction operator * (const Fraction& l, const Fraction& r)
   return t;
 }
 
-bool Fraction::operator>(const Fraction& l, const Fraction& r) const
+bool operator>(const Fraction& l, const Fraction& r)
 {
   return ((double) l.numerator / l.denominator) > ((double) r.numerator / r.denominator);
 }

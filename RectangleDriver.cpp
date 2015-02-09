@@ -24,8 +24,8 @@ int main()
   float length_f, width_f;
   Fraction length_frac, width_frac, x, y;
 
-  Rectangle<float> testfloat;
-  Rectangle<Fraction> testfraction;
+  Rectangle<float> testfloat = Rectangle<float>();
+  Rectangle<Fraction> testfraction = Rectangle<Fraction>();
 
   length_f = 1.3;
   width_f = 2.4;
@@ -155,8 +155,8 @@ int main()
   assert(1824 == x.denominator);
 
   //object copy test
-  Rectangle<float> copy = testfloat;
-  Rectangle<Fraction> copy2 = testfraction;
+  const Rectangle<float> copy = testfloat;
+  const Rectangle<Fraction> copy2 = testfraction;
   assert(copy.length_greater_than_width() == testfloat.length_greater_than_width());
   assert(copy.getPerimeter() == testfloat.getPerimeter());
   assert(copy.getArea() == testfloat.getArea());
@@ -173,8 +173,8 @@ int main()
   cout << "object copy test passed!\n";
 
   //object assignment test
-  Rectangle<float> copy3; copy3 = testfloat;
-  Rectangle<Fraction> copy4; copy4 = testfraction;
+  Rectangle<float> copy3 = Rectangle<float>(0,0); copy3 = testfloat;
+  Rectangle<Fraction> copy4 = Rectangle<Fraction>(width_frac, length_frac); copy4 = testfraction;
   assert(copy3.length_greater_than_width() == testfloat.length_greater_than_width());
   assert(copy3.getPerimeter() == testfloat.getPerimeter());
   assert(copy3.getArea() == testfloat.getArea());
