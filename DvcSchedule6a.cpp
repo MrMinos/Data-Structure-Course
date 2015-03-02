@@ -1,4 +1,4 @@
-// Lab 5b, Applying A Data Structure To A Database Program
+// Lab 6a, Write A Dynamic Array Class Template
 // Programmer: Minos Park 
 // Editor(s) used: Sublime Text 2 
 // Compiler(s) used: G++
@@ -9,7 +9,7 @@
 #include <cassert>
 #include <string>
 #include <ctime>
-#include "StaticArray.h"
+#include "DynamicArray.h"
 
 using namespace std;
 
@@ -24,14 +24,14 @@ struct SubjectCode
 int main()
 {
   // print my name and this assignment's title 
-  cout << "Lab 5b, Applying A Data Structure To A Database Program"; 
+  cout << "Lab 6a, Write A Dynamic Array Class Template\n"; 
   cout << "Programmer: Minos Park\n"; 
   cout << "Editor(s) used: Sublime Text 2\n"; 
   cout << "Compiler(s) used: G++\n"; 
   cout << "File: " << __FILE__ << endl; 
   cout << "Complied: " << __DATE__ << " at " << __TIME__ << endl << endl;
 
-  Array<SubjectCode, 200> subjectCodes;
+  Array<SubjectCode> subjectCodes;
   SubjectCode tmp;
   vector<string> dup(1, "");
   char *token;
@@ -49,10 +49,10 @@ int main()
   getline(fin, line); //Eliminate first line
   
   cout << "Progress Bar";
-  subjectCodes[0].sectionCount = 0;
+  
   while(fin.good())
   {
-    if(progressbar % 1000 == 0)
+    if(progressbar % 100 == 0)
     {
       cout << ".";
       cout.flush();
@@ -111,7 +111,6 @@ int main()
       assert(courseCount < 200);
       subjectCodes[courseCount] = tmp;
       subjectCodes[courseCount].sectionCount = 1;
-      check = true;
     }
   }
   cout << endl << endl;

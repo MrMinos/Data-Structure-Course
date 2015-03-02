@@ -19,8 +19,8 @@ public:
   int capacity() const {return CAPACITY;}
   int size() const;
   int lsearch(const DataType&) const;
-  bool containsKey(int i) const {return inUse[i];}
-  void deleteKey(int i) {inUse[i]=false;}
+  bool containsKey(int i) const {return (i < 0 || i >= CAPACITY)?dummy:inUse[i];}
+  void deleteKey(int i) {(i < 0 || i >= CAPACITY)?dummy:inUse[i]=false;}
 };
 template <class DataType, int CAPACITY>
 DataType& Array<DataType, CAPACITY>::operator[](int i)
