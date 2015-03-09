@@ -35,5 +35,13 @@ int main()
   Array<SubjectCode> b;
   b[5].sectionCount = 0;
   int temp = b[1].sectionCount;
-  cout << temp;
+  cout << temp << endl;
+  for (int i = 0; i < 12111; i++)
+  {
+    b[i].sectionCount = 1;
+    b[i].sectionCount--;
+  }
+  //for (int i = 0; i < 12110; i++)
+    //cout << b[i].sectionCount << endl;
+
 }

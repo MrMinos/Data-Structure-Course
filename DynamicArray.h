@@ -14,7 +14,7 @@ class Array
   bool* inUse;
   int CAPACITY;
   int inUseIndex;
-  static const int INITIAL_CAPACITY = 10;
+  static const int INITIAL_CAPACITY = 2;
   void changeCapacity(int);
 
 public:
@@ -44,7 +44,7 @@ Array<DataType>::Array()
 template <class DataType>
 DataType& Array<DataType>::operator[](int i)
 {
-  if(i == CAPACITY)changeCapacity(2 * CAPACITY);
+  if(i >= CAPACITY)changeCapacity(2 * i);
   if(!(i < 0 || i >= CAPACITY))
   {
     if(i > inUseIndex) inUseIndex = i;
@@ -66,8 +66,10 @@ void Array<DataType>::changeCapacity(int newCAPACITY)
     temp[j] = data[j];
     temp2[j] = inUse[j];
   }
-  delete [] data; data = temp;
-  delete [] inUse; inUse = temp2;
+  delete[] data; 
+  delete[] inUse;
+  data = temp; 
+  inUse = temp2;
   CAPACITY = newCAPACITY;
 }
 
