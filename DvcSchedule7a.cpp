@@ -1,4 +1,4 @@
-// Lab 6b, Using A Data Structure As A Data Member
+// Lab 7a, Write A Linked-List Solution
 // Programmer: Minos Park 
 // Editor(s) used: Sublime Text 2 
 // Compiler(s) used: G++
@@ -12,32 +12,28 @@
 
 using namespace std;
 
-struct Course
-{
-  int count;
-  string coursename;
-};
 struct SubjectCode
 {
-  int sectionCount;
-  string section;
-  string term;
+  int count;
   string name;
-  //vector<Course> course;
 };
-
+struct Node
+{
+  Node* next;
+  SubjectCode data;
+};
 
 int main()
 {
   // print my name and this assignment's title 
-  cout << "Lab 6b, Using A Data Structure As A Data Member\n"; 
+  cout << "Lab 7a,  Write A Linked-List Solution\n"; 
   cout << "Programmer: Minos Park\n"; 
   cout << "Editor(s) used: Sublime Text 2\n"; 
   cout << "Compiler(s) used: G++\n"; 
   cout << "File: " << __FILE__ << endl; 
   cout << "Complied: " << __DATE__ << " at " << __TIME__ << endl << endl;
 
- * Array<SubjectCode> subjectCodes;
+  Array<SubjectCode> subjectCodes;
   SubjectCode tmp;
   vector<string> dup(1, "");
   char *token;
@@ -75,7 +71,7 @@ int main()
     const string course((token = strtok(0, tab))?token : "");
     const string courseName(course.begin(), course.begin() + course.find('-'));
     
-    tmp.name = courseName;
+    tmp.name = course;
     tmp.section = section;
     tmp.term = term;
   
@@ -115,7 +111,7 @@ int main()
     if(check == false)
     {
       courseCount++;
-      assert(courseCount < 200);
+      assert(courseCount < 3000);
       subjectCodes[courseCount] = tmp;
       subjectCodes[courseCount].sectionCount = 1;
     }
