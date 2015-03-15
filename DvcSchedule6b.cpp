@@ -23,7 +23,7 @@ struct SubjectCode
   string section;
   string term;
   string name;
-  //vector<Course> course;
+  vector<Course> course;
 };
 
 
@@ -37,7 +37,7 @@ int main()
   cout << "File: " << __FILE__ << endl; 
   cout << "Complied: " << __DATE__ << " at " << __TIME__ << endl << endl;
 
- * Array<SubjectCode> subjectCodes;
+  vector<SubjectCode> subjectCodes;
   SubjectCode tmp;
   vector<string> dup(1, "");
   char *token;

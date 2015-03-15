@@ -9,9 +9,9 @@
 template <class DataType>
 class Array
 {
-  DataType dummy;
-  DataType* data;
-  bool* inUse;
+  DataType* dummy = NULL;
+  DataType* data = NULL;
+  bool* inUse = NULL;
   int CAPACITY;
   int inUseIndex;
   static const int INITIAL_CAPACITY = 2;
@@ -19,9 +19,10 @@ class Array
 
 public:
   Array();
-  ~Array() {delete [] data; delete [] inUse;}
+  ~Array() {delete [] data; delete [] inUse; delete [] dummy;}
   Array(const Array<DataType>&);
   DataType& operator[](int);
+  DataType& operator[](int) const;
   Array& operator=(const Array<DataType>&);
   int capacity() const {return CAPACITY;}
   int size() const {return inUseIndex + 1;}
@@ -35,6 +36,7 @@ Array<DataType>::Array()
 {
   CAPACITY = INITIAL_CAPACITY;
   data = new DataType[CAPACITY];
+  dummy = new DataType[1];
   inUse = new bool[CAPACITY];
   for (int i = 0; i < CAPACITY; i++)
     inUse[i]=false;
@@ -51,7 +53,17 @@ DataType& Array<DataType>::operator[](int i)
     inUse[i] = true;
     return data[i];
   }
-  else return dummy;
+  else return dummy[0];
+}
+
+template <class DataType>
+DataType& Array<DataType>::operator[](int i) const
+{
+  if(!(i < 0 || i >= CAPACITY))
+  {
+    return data[i];
+  }
+  else return dummy[0];
 }
 
 template <class DataType>
@@ -60,16 +72,18 @@ void Array<DataType>::changeCapacity(int newCAPACITY)
   DataType* temp = new DataType[newCAPACITY];
   bool* temp2 = new bool[newCAPACITY];
   for (int j = 0; j < newCAPACITY; j++)
-    inUse[j]=false;
+    temp2[j]=false;
   for (int j = 0; j < CAPACITY; j++)
   {
     temp[j] = data[j];
     temp2[j] = inUse[j];
   }
-  delete[] data; 
+  delete [] data; 
   delete[] inUse;
   data = temp; 
   inUse = temp2;
+  temp = NULL;
+  temp2 = NULL;
   CAPACITY = newCAPACITY;
 }
 

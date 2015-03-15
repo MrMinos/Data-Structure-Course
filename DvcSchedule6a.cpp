@@ -52,7 +52,7 @@ int main()
   
   while(fin.good())
   {
-    if(progressbar % 1 == 0)
+    if(progressbar % 10000 == 0)
     {
       cout << ".";
       cout.flush();
