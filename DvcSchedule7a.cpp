@@ -166,5 +166,12 @@ int main()
   double elapsedSeconds = (double)(clock() - startTime) / CLOCKS_PER_SEC;
   
   cout << "Computation Time: " << elapsedSeconds << endl;
+
+  step = root;
+  while (step != NULL)
+  {
+    delete step;
+    step = step->next;
+  }
   
 }

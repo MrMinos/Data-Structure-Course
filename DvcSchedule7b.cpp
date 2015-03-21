@@ -169,4 +169,10 @@ int main()
   
   cout << "Computation Time: " << elapsedSeconds << endl;
   
+  step = root;
+  while (step != NULL)
+  {
+    delete step;
+    step = step->next;
+  }
 }
