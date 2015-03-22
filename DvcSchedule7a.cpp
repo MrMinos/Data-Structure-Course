@@ -170,8 +170,9 @@ int main()
   step = root;
   while (step != NULL)
   {
+    last = step->next;
     delete step;
-    step = step->next;
+    step = last;
   }
   
 }

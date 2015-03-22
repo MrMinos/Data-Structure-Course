@@ -4,9 +4,10 @@
 // Compiler(s) used: G++
 
 #include <iostream>
-#include <stack>
 using namespace std;
+
 #include <cstring>
+#include "Stack.h"
 
 int main()
 {
@@ -20,7 +21,7 @@ int main()
   
   float num, a, b;
   char buf[100];
-  stack<float> calc, calc_out;
+  Stack<float> calc, calc_out;
 
   while(1)
   {
@@ -28,7 +29,7 @@ int main()
     if (!calc.empty()) calc_out = calc;
   while (!calc_out.empty())
   {
-    cout << calc_out.top() << " ";
+    cout << calc_out.peek() << " ";
       calc_out.pop();
   }
     cin >> buf;
@@ -41,8 +42,8 @@ int main()
       } 
       else
       {
-        b = calc.top(); calc.pop(); 
-        a = calc.top(); calc.pop();
+        b = calc.peek(); calc.pop(); 
+        a = calc.peek(); calc.pop();
         switch (buf[0])
         {
           case'+':

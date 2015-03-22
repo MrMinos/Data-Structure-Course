@@ -1,10 +1,10 @@
-// Lab 8a, Write And Apply A Stack Template
+// Lab 8b, Write And Test A Queue Template
 // Programmer: Minos Park 
 // Editor(s) used: Sublime Text 2 
 // Compiler(s) used: G++
 
-#ifndef Stack_h
-#define Stack_h
+#ifndef Queue_h
+#define Queue_h
 
 template <class DataType>
 struct Node
@@ -15,16 +15,17 @@ struct Node
 };
 
 template <class DataType>
-class Stack
+class Queue
 {
   Node<DataType>* root = NULL;
   Node<DataType>* step = NULL;
   Node<DataType>* last = NULL;
   DataType temp;
+  DataType dummy;
 
   public:
-  Stack();
-  ~Stack();
+  Queue();
+  ~Queue();
   DataType pop();
   DataType peek(){return last->data;}
   void push(DataType);
@@ -33,7 +34,7 @@ class Stack
 };
 
 template <class DataType>
-Stack<DataType>::Stack()
+Queue<DataType>::Queue()
 {
   root = new Node<DataType>;
   root->prev = NULL;
@@ -43,7 +44,7 @@ Stack<DataType>::Stack()
 }
 
 template <class DataType>
-Stack<DataType>::~Stack()
+Queue<DataType>::~Queue()
 {
   step = root;
   while (step != NULL)
@@ -55,18 +56,30 @@ Stack<DataType>::~Stack()
 }
 
 template <class DataType>
-DataType Stack<DataType>::pop()
+DataType Queue<DataType>::pop()
 {
-  temp = last->data;
-  last = last->prev;
-  delete last->next;
-  last->next = NULL;
-  return temp;
-  // do check on last element pop
+  if(size() > 1)
+  {
+    temp = root->next->data;
+    step = root->next;
+    root->next = root->next->next;
+    delete step;
+    root->next->prev = root;
+    return temp;
+  }
+  else if(size() == 1)
+  {
+    temp = root->next->data;
+    delete root->next;
+    root->next = NULL;
+    last = root;
+    return temp;
+  }
+  else return dummy;
 }
 
 template <class DataType>
-void Stack<DataType>::push(DataType datum)
+void Queue<DataType>::push(DataType datum)
 {
   last->next = new Node<DataType>;
   step = last;
@@ -77,7 +90,7 @@ void Stack<DataType>::push(DataType datum)
 }
 
 template <class DataType>
-int Stack<DataType>::size()
+int Queue<DataType>::size()
 {
   int size = 0;
   step = root->next;
@@ -89,20 +102,6 @@ int Stack<DataType>::size()
   return size;
 }
 
-template <class DataType>
-Stack<DataType>::Stack(const Stack<DataType>& a): start(0)
-{
-  Node<DataType>* end = NULL;
-  for (step = a.start; step; step = step->next)
-  {
-  	Node<DataType>* node = new Node<DataType>;
-  	node->data = step->data;
-  	node->next = NULL;
-  	if (end) end->next = node;
-  	else start = node;
-  	end = node;
-  }
-}
 //copy operator and reference operator
 
 #endif
