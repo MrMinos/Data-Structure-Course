@@ -44,12 +44,45 @@ int main()
   cout << "Queue size expected to be 4, Real value: " << queue.size() << endl;
   assert(queue.size() == 4);
 
-  Stack<int> test = stack;
-  assert(test.peek() == 66);
-  assert(test.size() == 1);
+  Queue<int> test = queue;
+  cout << "Expected test peek 5666, Real value: " << test.peek() << endl;
+  assert(test.peek() == 5666);
+  cout << "Expected test size 4, Real Value: " << test.size() << endl;
+  assert(test.size() == 4);
 
-  Stack<int> test2; test2 = stack;
-  assert(test.peek() == 66);
-  assert(test.size() == 1);
+  Queue<int> test2; test2 = queue;
+  cout << "Expected test2 peek 5666, Real value: " << test2.peek() << endl;
+  assert(test2.peek() == 5666);
+  cout << "Expected test size 4, Real Value: " << test2.size() << endl;
+  assert(test2.size() == 4);
  
+  queue.pop();
+  queue.pop();
+  test.pop();
+  test2.pop();
+  test.pop();
+  cout << "Test popped twice and Queue popped twice their peek should match" << endl;
+  assert(test.peek() == queue.peek());
+  cout << "Matched" << endl;
+  test.pop();
+  test.pop();
+  cout << "Test should be empty, Real value (Empty = 1): " << test.empty() << endl;
+  assert(test.empty() == 1);
+  test2.pop();
+  test.push(0);
+  cout << "Test and test2 should match due to few pops and push" << endl;
+  assert(test.peek() == test2.peek());
+
+  queue.clear();
+  cout << "Queue should be empty, Real value (Empty = 1): " << queue.empty() << endl;
+  assert(1 == queue.empty());
+  queue.push(1111);
+  queue.push(5632);
+  cout << "Queue size should be 2, Real Value: " << queue.size() << endl;
+  assert(2 == queue.size());
+  test.clear();
+  test.push(1111);
+  cout << "test peek and queue peek should match queue peek: " << queue.peek() << "test peek: " << test.peek() << endl;
+  assert (test.peek() == queue.peek());
+  cout << "Matched" << endl;
 }

@@ -27,10 +27,13 @@ class Queue
   Queue();
   ~Queue();
   DataType pop();
-  DataType peek(){return last->data;}
+  DataType peek(){return root->next->data;}
   void push(DataType);
   int size();
   bool empty(){return (size() == 0?true:false);}
+  Queue(const Queue<DataType>& a);
+  Queue<DataType>& operator=(const Queue<DataType>& a);
+  void clear();
 };
 
 template <class DataType>
@@ -102,6 +105,74 @@ int Queue<DataType>::size()
   return size;
 }
 
-//copy operator and reference operator
+template <class DataType>
+Queue<DataType>::Queue(const Queue<DataType>& a)
+{
+  Node<DataType>* end = NULL;
+  root = new Node<DataType>;
+  for (step = a.root; step; step = step->next)
+  {
+    Node<DataType>* node = new Node<DataType>;
+    node->data = step->data;
+    node->next = NULL;
+    node->prev = end;
+    if (end) end->next = node;
+    else root = node;
+    end = node;
+  }
+  last = end;
+}
 
+template <class DataType>
+Queue<DataType>& Queue<DataType>::operator=(const Queue<DataType>& a)
+{
+  if (this != &a)
+  {
+    Node<DataType>* end = NULL;
+
+    while (root)
+    {
+      step = root->next;
+      delete root;
+      root = step;
+    }
+    root = new Node<DataType>;
+    root->next = NULL;
+    root->prev = NULL;
+    for (step = a.root; step; step = step->next)
+    {
+      Node<DataType>* node = new Node<DataType>;
+      node->data = step->data;
+      node->next = NULL;
+      node->prev = end;
+      if (end) end->next = node;
+      else root = node;
+      end = node;
+    }
+    last = end;
+  }
+  return *this;
+}
+
+template <class DataType>
+void Queue<DataType>::clear()
+{
+  if (step != root)
+  {
+    step = root->next;
+    while (step)
+    {
+      delete step;
+      step = step->next;
+    }
+    root->next = NULL;
+    last = root;
+    step = root;
+  }
+  else if(step == root)
+  {
+    root->next = NULL;
+    last = root;
+  }
+}
 #endif

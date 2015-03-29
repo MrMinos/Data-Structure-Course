@@ -20,7 +20,7 @@ class Stack
   Node<DataType>* root = NULL;
   Node<DataType>* step = NULL;
   Node<DataType>* last = NULL;
-  DataType temp;
+  DataType temp, dummydata;
 
   public:
   Stack();
@@ -30,6 +30,9 @@ class Stack
   void push(DataType);
   int size();
   bool empty(){return (size() == 0?true:false);}
+  Stack(const Stack<DataType>& a);
+  Stack<DataType>& operator=(const Stack<DataType>& a);
+  void clear();
 };
 
 template <class DataType>
@@ -57,12 +60,15 @@ Stack<DataType>::~Stack()
 template <class DataType>
 DataType Stack<DataType>::pop()
 {
-  temp = last->data;
-  last = last->prev;
-  delete last->next;
-  last->next = NULL;
-  return temp;
-  // do check on last element pop
+  if (last != root)
+  {
+  	temp = last->data;
+    last = last->prev;
+    delete last->next;
+    last->next = NULL;
+    return temp;
+  }
+  else return dummydata;
 }
 
 template <class DataType>
@@ -90,19 +96,65 @@ int Stack<DataType>::size()
 }
 
 template <class DataType>
-Stack<DataType>::Stack(const Stack<DataType>& a): start(0)
+Stack<DataType>::Stack(const Stack<DataType>& a)
 {
   Node<DataType>* end = NULL;
-  for (step = a.start; step; step = step->next)
+  for (step = a.root; step; step = step->next)
   {
   	Node<DataType>* node = new Node<DataType>;
   	node->data = step->data;
   	node->next = NULL;
+  	node->prev = end;
   	if (end) end->next = node;
-  	else start = node;
+  	else root = node;
   	end = node;
   }
+  last = end;
 }
-//copy operator and reference operator
+
+template <class DataType>
+Stack<DataType>& Stack<DataType>::operator=(const Stack<DataType>& a)
+{
+  if (this != &a)
+  {
+  	Node<DataType>* end = NULL;
+
+  	while (root)
+  	{
+  	  step = root->next;
+  	  delete root;
+  	  root = step;
+  	}
+  	for (step = a.root; step; step = step->next)
+  	{
+  	  Node<DataType>* node = new Node<DataType>;
+  	  node->data = step->data;
+  	  node->next = NULL;
+  	  node->prev = end;
+  	  if (end) end->next = node;
+  	  else root = node;
+  	  end = node;
+  	}
+  	last = end;
+  }
+  return *this;
+}
+
+template <class DataType>
+void Stack<DataType>::clear()
+{
+  if (step != root)
+  {
+  	step = root->next;
+    while (step)
+    {
+  	  delete step;
+  	  step = step->next;
+    }
+    root->next = NULL;
+    last = root;
+    step = root;
+  }
+}
 
 #endif

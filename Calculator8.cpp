@@ -12,7 +12,7 @@ using namespace std;
 int main()
 {
   // print my name and this assignment's title 
-  cout << "Lab 8a, Write And Apply A Stack Templat\n"; 
+  cout << "Lab 8a, Write And Apply A Stack Template\n"; 
   cout << "Programmer: Minos Park\n"; 
   cout << "Editor(s) used: Sublime Text 2\n"; 
   cout << "Compiler(s) used: G++\n"; 
@@ -27,11 +27,11 @@ int main()
   {
     cout << "Enter: ";
     if (!calc.empty()) calc_out = calc;
-  while (!calc_out.empty())
-  {
-    cout << calc_out.peek() << " ";
-      calc_out.pop();
-  }
+    while (!calc_out.empty())
+    {
+      cout << calc_out.peek() << " ";
+        calc_out.pop();
+    }
     cin >> buf;
     if (buf[0] == 'q' || buf[0] == 'Q') return 0;
     else if (buf[0] == '+' || buf[0] == '-' || buf[0] == '*' || buf[0] == '/')
