@@ -4,6 +4,8 @@
 // Compiler(s) used: G++
 
 #include <iostream>
+#include <fstream>
+#include <string>
 using namespace std;
 
 int main()
@@ -16,6 +18,20 @@ int main()
   cout << "File: " << __FILE__ << endl; 
   cout << "Complied: " << __DATE__ << " at " << __TIME__ << endl << endl; 
 
+  Program structure would be 
+  1. file reading portion, determine the file extension
+  2. file parsing portion, a line and then the characters for the special characters?
+  3. analyzing the brackets
+  4. Reporing any error back, if not ending with no error
   
+  //file read
+  ifstream fin;
+  string filename;
 
+  cout << "Enter filename (H, CPP, JAVA, HTML, or JS): ";
+  cin >> filename;
+  
+  fin.open(filename);
+  if (!fin.good()) throw "I/O error";
+  getline(fin, line); //Eliminate first line
 }
