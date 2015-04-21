@@ -9,6 +9,8 @@
 #ifndef DynamicArray_h
 #define DynamicArray_h
 
+#include <iostream>
+
 template <class DataType>
 class Array
 {
@@ -21,19 +23,28 @@ class Array
 
 public:
   Array();
+  Array(int);
   ~Array() {delete [] data; delete [] dummy;}
   Array(const Array<DataType>&);
   DataType& operator[](int);
   DataType& operator[](int) const;
   Array& operator=(const Array<DataType>&);
   int capacity() const {return CAPACITY;}
-  int size() const {return (inUseIndex >= 0)(inUseIndex + 1):0;}
 };
 
 template <class DataType>
 Array<DataType>::Array()
 {
   CAPACITY = INITIAL_CAPACITY;
+  data = new DataType[CAPACITY];
+  dummy = new DataType[1];
+  inUseIndex = -1;
+}
+
+template <class DataType>
+Array<DataType>::Array(int big)
+{
+  CAPACITY = big;
   data = new DataType[CAPACITY];
   dummy = new DataType[1];
   inUseIndex = -1;
@@ -98,34 +109,71 @@ Array<DataType>& Array<DataType>::operator=(const Array<DataType>& a)
 template<class DataType>
 class PriorityQueue
 {
-  int usedIndex;
+  int usedIndex, parentIndex, temp, size_var;
   Array<DataType> pq;
-  void swap();
+  DataType a;
 public:
-  PriorityQueue(int=2);
+  PriorityQueue() {size_var = 0;}
+  PriorityQueue(int big) {size_var = 0; for (int n = 0; n < big; n++, pq[n]);}
   void enqueue(const DataType&);
-  DataType top() const;
+  DataType top() const {return pq[0];}
   DataType dequeue();
-  bool empty() const;
-  void clear();
-  int size() const;
+  bool empty() const {return (size_var == 0) ? true : false;}
+  void clear() {size_var = 0;}
+  int size() const {return size_var;}
 };
-
-template <class DataType>
-PriorityQueue<DataType>::PriorityQueue()
-{
-  usedIndex = 0;
-}
 
 template <class DataType>
 void PriorityQueue<DataType>::enqueue(const DataType& input)
 {
+  usedIndex = size_var;
   pq[usedIndex] = input;
-  for (int i = 0; i < usedIndex; i++)
+  while (true)
   {
     parentIndex = (usedIndex + 1)/2 - 1;
     if (parentIndex < 0) break;
-    if (pq[parentIndex] >= pq[usedIndex]) swap();
+    if (pq[parentIndex] >= pq[usedIndex]) break;
+    a = pq[parentIndex];
+    pq[parentIndex] = pq[usedIndex];
+    pq[usedIndex] = a;
+    usedIndex = parentIndex;
   }
+  size_var++;
+}
+
+template <class DataType>
+DataType PriorityQueue<DataType>::dequeue()
+{
+  DataType b; 
+  if (size_var != 0) b = pq[0];
+  else return a;
+  usedIndex = 0;
+  while(true)
+  {
+    if (2 * usedIndex + 1 >= size_var) break;
+    else if ((2 * usedIndex + 1 == size_var -1) || (pq[2 * usedIndex + 1] >= pq[2 * usedIndex + 2]))
+    {
+      pq[usedIndex] = pq[2 * usedIndex + 1];
+      usedIndex = 2 * usedIndex + 1;
+    }
+    else
+    {
+      pq[usedIndex] = pq[2 * usedIndex + 2];
+      usedIndex = 2 * usedIndex + 2;
+    }
+  }
+  size_var--;
+  pq[usedIndex] = pq[size_var];
+  while (true)
+  {
+    parentIndex = (usedIndex + 1)/2 - 1;
+    if (parentIndex < 0) break;
+    if (pq[parentIndex] >= pq[usedIndex]) break;
+    a = pq[parentIndex];
+    pq[parentIndex] = pq[usedIndex];
+    pq[usedIndex] = a;
+    usedIndex = parentIndex;
+  }
+  return b;
 }
 #endif
